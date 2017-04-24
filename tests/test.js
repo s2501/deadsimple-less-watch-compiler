@@ -1,7 +1,7 @@
 var assert = require("assert")
 , lessWatchCompilerUtils = require('../lib/lessWatchCompilerUtils.js')
 , sh = require('shelljs')
-, cwd = sh.pwd();
+, cwd = sh.pwd().toString();
 
 
 // TODO - Add meaningful tests duh!
@@ -13,7 +13,7 @@ describe('lessWatchCompilerUtils Module API', function(){
             assert.equal("function", typeof(lessWatchCompilerUtils.walk));
         });
         it('walk() function should return an object of files ', function(done){
-            var timeout ;
+            var timeout;
             lessWatchCompilerUtils.walk(cwd, {}, function(err, files){
                 for (var i in files) {
                     assert.equal("object", typeof(files[i]));
@@ -47,7 +47,13 @@ describe('lessWatchCompilerUtils Module API', function(){
         it('should run the correct command with minified flag', function(){
             lessWatchCompilerUtils.config.outputFolder = "testFolder";
             lessWatchCompilerUtils.config.minified = true;
-            assert.equal("lessc -x test > testFolder./test.css", lessWatchCompilerUtils.compileCSS("test", true));
+            assert.equal("lessc -x test testFolder/test.css", lessWatchCompilerUtils.compileCSS("test", true));
+        });
+        it('should run the correct command with sourceMap flag', function(){
+            lessWatchCompilerUtils.config.outputFolder = "testFolder";
+            lessWatchCompilerUtils.config.minified = false;
+            lessWatchCompilerUtils.config.sourceMap = true;
+            assert.equal("lessc --source-map test testFolder/test.css", lessWatchCompilerUtils.compileCSS("test", true));
         });
     })
     describe('filterFiles()', function(){

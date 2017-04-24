@@ -1,29 +1,37 @@
 {
   "name": "less-watch-compiler",
-  "version": "1.2.2",
+  "version": "1.4.2",
   "description": "A command that watches folders(and subfolders) for file changes and automatically compile the less css files into css. This is a file system watcher and compiler.",
   "main": "less-watch-compiler.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "cd tests && mocha"
+    "test": "tests/test.sh",
+    "postversion": "git push && git push --tags",
+    "commit": "git-cz -n"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/jonycheung/deadsimple-less-watch-compiler.git"
+    "url": "https://github.com/jonycheung/deadsimple-less-watch-compiler.git",
+    "type": "git"
   },
   "bin": {
     "less-watch-compiler": "./less-watch-compiler.js"
   },
   "dependencies": {
-    "shelljs": ">= 0.4.0",
+    "amdefine": ">= 0.1.0",
+    "commander": "^2.9.0",
     "extend": ">= 2.0.0",
-    "amdefine": ">= 0.1.0"
+    "global": "^4.3.1",
+    "less": "^2.7.1",
+    "less-watch-compiler": "^1.2.3",
+    "mocha": "^3.1.2",
+    "shelljs": ">= 0.4.0"
   },
   "engine": "node 0.10.26",
   "devDependencies": {
-    "mocha": "2.x.x"
+    "cz-conventional-changelog": "^1.2.0",
+    "mocha": "^3.1.2"
   },
   "preferGlobal": "true",
   "keywords": [
@@ -44,5 +52,10 @@
   "bugs": {
     "url": "https://github.com/jonycheung/deadsimple-less-watch-compiler/issues"
   },
-  "homepage": "https://github.com/jonycheung/deadsimple-less-watch-compiler"
+  "homepage": "https://github.com/jonycheung/deadsimple-less-watch-compiler",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
